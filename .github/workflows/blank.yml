@@ -16,6 +16,6 @@ jobs:
     steps:
       - name: checkout the code
         uses: actions/checkout@v6
-      - name: Print index.html file
-        run: cat index.html
+      - name: Print calculator file
+        run: cat calculator.html
  
