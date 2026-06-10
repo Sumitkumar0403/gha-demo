@@ -1,4 +1,4 @@
-name: Hello world
+name: Github action demo
 on:
   push:
     branches:
@@ -11,9 +11,11 @@ on:
       - master
       
 jobs:
-  build:
+  action-demo:
     runs-on: ubuntu-latest
     steps:
-      - name: Build Setup
-        run: echo "Hello ${{secrets.DOCKER_PASS}}" 
+      - name: checkout the code
+        uses: actions/checkout@v6
+      - name: Print index.html file
+        run: cat index.html
  
