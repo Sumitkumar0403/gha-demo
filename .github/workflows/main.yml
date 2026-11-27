@@ -34,7 +34,7 @@ jobs:
     needs: Build  
     steps:
       - name: Run trivy filesystem scan
-        uses: aquasecurity/trivy-action@v2
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           scan-type: 'fs'
           scan-ref: .
@@ -43,7 +43,7 @@ jobs:
           exit-code: '0'
 
       - name: Upload Trivy Scan Results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v3.0
         with:
           name: trivy-scan-results
           path: trivy-report.json
