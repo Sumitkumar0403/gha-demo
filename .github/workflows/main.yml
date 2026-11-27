@@ -15,7 +15,7 @@ jobs:
       - name: Code Checkout
         uses: actions/checkout@v7
       - name: Build
-        run: echo "Building projet..."
+        run: echo "Building project..."
 
 
   Testing:
@@ -28,5 +28,24 @@ jobs:
       - name: Run Tests on main branch
         if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
         run: echo "Running tests..."
+
+  Security_Scan:
+    runs-on: ubuntu-latest
+    needs: Build  
+    steps:
+      - name: Run trivy filesystem scan
+        uses: aquasecurity/trivy-action@v2
+        with:
+          scan-type: 'fs'
+          scan-ref: .
+          format: 'json'
+          severity: 'CRITICAL,HIGH,MEDIUM'
+          exit-code: '0'
+
+      - name: Upload Trivy Scan Results
+        uses: actions/upload-artifact@v3
+        with:
+          name: trivy-scan-results
+          path: trivy-report.json
 
 
